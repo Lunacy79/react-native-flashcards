@@ -1,15 +1,17 @@
 import React, { Component } from "react";
-import { StyleSheet, View, Text, Button, ScrollView } from "react-native";
-import { getDecks } from "../utils/api";
+import { StyleSheet, View, Text, Button, TextInput } from "react-native";
+import { addCardToDeck, getDecks } from "../utils/api";
 import { AppLoading } from "expo";
-import { white, gray } from "../utils/colors";
+import { white, gray, pink } from "../utils/colors";
 import { formatNumberCards } from "../utils/helpers";
 
 
 class AddQuestion extends Component {
   state = {
     ready: false,
-    decks: {}
+    decks: {},
+    answer: '',
+    question: ''
   };
 
   componentDidMount() {
@@ -17,28 +19,45 @@ class AddQuestion extends Component {
       .then((decks) => this.setState(() => ({ ready: true, decks: decks })));
   }
 
+  submit = () => {
+    const card = {question: this.state.question, answer: this.state.answer}
+    console.log("add-question title:",this.props.navigation.state.params.entryId, card)
+    const title = this.props.navigation.state.params.entryId
+    addCardToDeck(title, card)
+    .then(() => this.props.navigation.navigate('Deck', { entryId: this.props.navigation.state.params.entryId }))
+    this.setState({ question: '', answer: '' })
+  };
+
   render() {
     if (!this.state.ready) {
       return <AppLoading />;
     }
 
-    console.log(this.state.decks)
+    console.log("add-question", this.state.decks)
 
     return (
-      <ScrollView style={styles.container}>
-        {Object.keys(this.state.decks).map(deck => {
-          const { title, questions } = this.state.decks[deck];
-          return (
-            <TouchableOpacity key={deck} style={styles.deck} onPress={() => this.props.navigation.navigate("Deck", { entryId: deck })
-            }>
-              <Text style={styles.deckText}>{title}</Text>
-              <Text style={styles.cardNumber}>
-                {questions ? formatNumberCards(questions) : null}
-              </Text>
-            </TouchableOpacity>
-          );
-        })}
-      </ScrollView>
+      <View style={styles.container}>
+        <Text style={styles.title}>
+          Enter a new question:
+        </Text>
+        <TextInput
+          placeholder="Question"
+          onChangeText={input => this.setState({ question: input })}
+          value={this.state.question}
+          style={styles.input}
+        />
+        <TextInput
+          placeholder="Answer"
+          onChangeText={input => this.setState({ answer: input })}
+          value={this.state.answer}
+          style={styles.input}
+        />
+        <Button
+          style={styles.submit}
+          onPress={this.submit}
+          title="Add Question"
+        />
+      </View>
     );
   }
 }
@@ -49,25 +68,35 @@ const styles = StyleSheet.create({
     alignItems: "stretch",
     justifyContent: "flex-start"
   },
-  deck: {
-    flex: 1,
+  title: {
+    justifyContent: "center",
+    alignItems: "stretch",
+    fontSize: 25,
+    color: '#000',
+    marginBottom: 18,
+    height: 80,
+    marginLeft: 20,
+    marginRight: 20
+  },
+  input: {
+    justifyContent: "center",
+    alignItems: "stretch",
+    fontSize: 14,
+    color: pink,
+    borderColor: '#000',
+    borderWidth: 1,
+    marginBottom: 18,
+    height: 80,
+    marginLeft: 20,
+    marginRight: 20
+  },
+  submit: {
     justifyContent: "center",
     alignItems: "center",
-    padding: 18,
-    margin: 8,
-    backgroundColor: gray,
-    height: 140,
-    borderRadius: 10,
-  },
-  deckText: {
-    fontSize: 25,
-    marginBottom: 8,
-    color: white,
-  },
-  cardNumber: {
-    fontSize: 14,
-    color: white,
-    marginBottom: 8,
+    backgroundColor: '#eee',
+    color: '#fff',
+    height: 60,
+    width: 100
   }
 });
 

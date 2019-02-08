@@ -21,7 +21,7 @@ class Home extends Component {
       return <AppLoading />;
     }
 
-    console.log(this.state.decks)
+    console.log("home:", this.state.decks)
 
     return (
       <ScrollView style={styles.container} contentContainerStyle={{ alignItems: "stretch", justifyContent: "flex-start" }}>

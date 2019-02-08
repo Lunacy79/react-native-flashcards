@@ -32,10 +32,10 @@ class AddDeck extends Component {
         <Button
           style={styles.submit}
           onPress={this.submit}
-          title="Submit"
+          title="Add Deck"
         />
       </View>
-    );
+    )
   }
 }
 

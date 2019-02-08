@@ -4,6 +4,7 @@ import Home from './components/Home'
 import AddQuestion from './components/AddQuestion'
 import Deck from './components/Deck'
 import AddDeck from './components/AddDeck'
+import Quiz from './components/Quiz'
 import { TabNavigator, StackNavigator } from 'react-navigation'
 import { purple, white } from './utils/colors'
 
@@ -41,7 +42,11 @@ const MainNavigator = StackNavigator({
   AddQuestion: {
     screen: AddQuestion,
     navigationOptions: {
+      title: "Add Question",
       headerTintColor: white,
+      headerTitleSize: {
+        fontSize: 20
+      },
       headerStyle: {
         backgroundColor: purple,
       }
@@ -51,6 +56,19 @@ const MainNavigator = StackNavigator({
     screen: Deck,
     navigationOptions: {
       title: "Deck View",
+      headerTintColor: white,
+      headerTitleSize: {
+        fontSize: 20
+      },
+      headerStyle: {
+        backgroundColor: purple,
+      }
+    }
+  },
+  Quiz: {
+    screen: Quiz,
+    navigationOptions: {
+      title: "Quiz",
       headerTintColor: white,
       headerTitleSize: {
         fontSize: 20

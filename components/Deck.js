@@ -2,9 +2,11 @@ import React, { Component } from "react";
 import { StyleSheet, View, Text, Button } from "react-native";
 import { getDecks } from "../utils/api";
 import { formatNumberCards } from "../utils/helpers";
+import { green } from "../utils/colors"
 
 class Deck extends Component {
   state = {
+    ready: false,
     decks: {}
   };
 
@@ -31,16 +33,16 @@ class Deck extends Component {
         </Text>
         <Button
           onPress={() =>
-            this.props.navigation.navigate("Deck", { entryId: deck && deck })
+            this.props.navigation.navigate("AddQuestion", { entryId: deck.title })
           }
-          title="View"
+          title="Add Question"
           style={styles.button1}
         />
         <Button
           onPress={() =>
-            this.props.navigation.navigate("Deck", { entryId: deck && deck })
+            this.props.navigation.navigate("Quiz", { entryId: deck && deck })
           }
-          title="View"
+          title="Start Quiz"
           style={styles.button2}
         />
       </View>
@@ -73,6 +75,24 @@ const styles = StyleSheet.create({
     height: 80,
     marginLeft: 20,
     marginRight: 20
+  },
+  button1: {
+    justifyContent: "center",
+    alignSelf: "center",
+    alignItems: "center",
+    backgroundColor: '#eee',
+    color: '#fff',
+    height: 60,
+    width: 100
+  },
+  button2: {
+    justifyContent: "center",
+    alignSelf: "center",
+    alignItems: "center",
+    backgroundColor: green,
+    color: '#fff',
+    height: 60,
+    width: 100
   },
 });
 

@@ -42,7 +42,7 @@ export const getInitialDecks = () => {
 export function getDecks() {
   return AsyncStorage.getItem(FLASHCARD_KEY).then(results => {
     if (results) {
-      console.log(JSON.parse(results))
+      console.log("api:", JSON.parse(results))
       return JSON.parse(results);
     } else {
       AsyncStorage.setItem(FLASHCARD_KEY, JSON.stringify(initialDecks));
@@ -69,4 +69,15 @@ export function saveDeckTitle(title) {
       }
     })
   );
+}
+
+export function addCardToDeck(title, card) {
+  return AsyncStorage.getItem(FLASHCARD_KEY)
+    .then(results => JSON.parse(results))
+    .then(results => {
+      console.log("results:",results[title])
+      results[title].questions.push(card);
+      AsyncStorage.setItem(FLASHCARD_KEY, JSON.stringify(results));
+      return results;
+    });
 }
