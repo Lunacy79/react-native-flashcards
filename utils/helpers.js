@@ -1,5 +1,5 @@
 import React from "react";
-import { Text } from "react-native";
+import { Text, AsyncStorage } from "react-native";
 import { Notifications, Permissions } from "expo";
 
 export const formatNumberCards = questions => {
@@ -10,6 +10,7 @@ export const formatNumberCards = questions => {
   }
 };
 
+const NOTIFICATION_KEY = "flashcards: decks";
 
 function getLocalNotification() {
   return {
@@ -18,14 +19,17 @@ function getLocalNotification() {
 }
 
 export function setLocalNotification() {
+  
   AsyncStorage.getItem(NOTIFICATION_KEY)
     .then(JSON.parse)
     .then(data => {
       if (data === null) {
         Permissions.askAsync(Permissions.NOTIFICATIONS).then(({ status }) => {
           if (status === "granted") {
+
             Notifications.cancelAllScheduledNotificationsAsync();
-            Notifications.scheduleLocalNotificationAsync(getLocalNotification(), { time: ((new Date()).getDate() + 1), repeat: 'day' });
+
+            Notifications.scheduleLocalNotificationAsync(getLocalNotification(), { time: ((new Date()).getDate() + 1),  repeat: 'day' });
             AsyncStorage.setItem(NOTIFICATION_KEY, JSON.stringify(true));
           }
         });

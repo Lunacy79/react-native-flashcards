@@ -7,6 +7,7 @@ import AddDeck from './components/AddDeck'
 import Quiz from './components/Quiz'
 import { TabNavigator, StackNavigator } from 'react-navigation'
 import { purple, white } from './utils/colors'
+import { setLocalNotification } from './utils/helpers'
 
 
 const Tabs = TabNavigator({
