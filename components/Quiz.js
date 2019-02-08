@@ -59,7 +59,7 @@ class Quiz extends Component {
     if (questionNumber === deck.questions.length) {
       return (
         <View style={styles.container}>
-          <Text style={styles.text}>
+          <Text style={styles.result}>
             You completed with {(this.state.correct / (this.state.incorrect + this.state.correct) * 100).toFixed(2)} %!
           </Text>
           <TouchableOpacity style={styles.button} onPress={this.restart}>
@@ -123,6 +123,14 @@ const styles = StyleSheet.create({
   },
   text: {
     fontSize: 25,
+    color: '#000',
+    marginTop: 0,
+    textAlign: "center",
+    marginBottom: 30
+  },
+  result: {
+    fontSize: 25,
+    marginTop: 80,
     color: '#000',
     marginTop: 0,
     textAlign: "center",

@@ -81,6 +81,9 @@ const MainNavigator = StackNavigator({
 })
 
 export default class App extends Component {
+  componentDidMount() {
+    setLocalNotification();
+  }
   render() {
     return (
         <View style={{flex: 1}}>
