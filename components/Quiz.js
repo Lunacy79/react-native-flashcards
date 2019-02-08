@@ -90,11 +90,11 @@ class Quiz extends Component {
 
           {this.state.showAnswer ? (
             <TouchableOpacity style={styles.answer} onPress={this.showAnswer}>
-              <Text style={styles.buttonText}>Show Question</Text>
+              <Text style={styles.answerText}>Show Question</Text>
             </TouchableOpacity>
           ) : (
             <TouchableOpacity style={styles.answer} onPress={this.showAnswer}>
-              <Text style={styles.buttonText}>Show Answer</Text>
+              <Text style={styles.answerText}>Show Answer</Text>
             </TouchableOpacity>
           )}
           <TouchableOpacity style={styles.buttonGreen} onPress={this.correct}>
@@ -117,27 +117,36 @@ const styles = StyleSheet.create({
   },
   number: {
     color: gray,
-    marginBottom: 10
+    fontSize: 15,
+    marginBottom: 50,
+    marginTop: 80
   },
   text: {
     fontSize: 25,
     color: '#000',
     marginTop: 0,
-    textAlign: "center"
+    textAlign: "center",
+    marginBottom: 30
   },
   answer: {
     color: blue,
     backgroundColor: 'transparent',
-    fontSize: 18,
-    margin: 20
+    fontSize: 20,
+    marginBottom: 50
+  },
+  answerText: {
+    color: '#000',
+    fontSize: 20,
+    marginBottom: 50
   },
   button: {
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: '#eee',
+    backgroundColor: '#333',
     color: '#fff',
     height: 60,
-    width: 100
+    width: 200,
+    marginBottom: 30
   },
   buttonRed: {
     justifyContent: "center",
@@ -145,7 +154,9 @@ const styles = StyleSheet.create({
     backgroundColor: red,
     color: '#fff',
     height: 60,
-    width: 100
+    width: 200,
+    marginBottom: 30,
+    borderRadius: 10
   },
   buttonGreen: {
     justifyContent: "center",
@@ -153,7 +164,9 @@ const styles = StyleSheet.create({
     backgroundColor: green,
     color: '#fff',
     height: 60,
-    width: 100
+    width: 200,
+    marginBottom: 30,
+    borderRadius: 10
   },
   buttonText: {
     color: '#fff',

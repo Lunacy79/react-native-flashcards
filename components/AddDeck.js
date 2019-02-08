@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { StyleSheet, View, Text, Button, TextInput} from "react-native";
+import { StyleSheet, View, Text, Button, TextInput, TouchableOpacity } from "react-native";
 import { pink, gray, white } from "../utils/colors";
 import { saveDeckTitle } from "../utils/api";
 
@@ -29,11 +29,9 @@ class AddDeck extends Component {
           value={this.state.deckText}
           style={styles.input}
         />
-        <Button
-          style={styles.submit}
-          onPress={this.submit}
-          title="Add Deck"
-        />
+        <TouchableOpacity style={styles.submit} disabled={this.state.decktext === ''} onPress={this.submit}>
+            <Text style={styles.buttonText}>Add Deck</Text>
+          </TouchableOpacity>
       </View>
     )
   }
@@ -42,39 +40,43 @@ class AddDeck extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: "stretch",
+    alignItems: "center",
     justifyContent: "flex-start"
   },
   title: {
-    justifyContent: "center",
-    alignItems: "stretch",
     fontSize: 25,
     color: '#000',
     marginBottom: 18,
+    marginTop: 80,
     height: 80,
     marginLeft: 20,
     marginRight: 20
   },
   input: {
-    justifyContent: "center",
-    alignItems: "stretch",
     fontSize: 14,
-    color: pink,
+    alignSelf: "stretch",
     borderColor: '#000',
     borderWidth: 1,
     marginBottom: 18,
-    height: 80,
+    height: 60,
+    fontSize: 20,
     marginLeft: 20,
-    marginRight: 20
+    marginRight: 20,
+    padding: 14
   },
   submit: {
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: '#eee',
+    backgroundColor: '#333',
     color: '#fff',
     height: 60,
-    marginLeft: 20,
-    marginRight: 20
+    width: 200,
+    marginBottom: 30,
+    borderRadius: 10
+  },
+  buttonText: {
+    color: '#fff',
+    fontSize: 15
   }
 });
 

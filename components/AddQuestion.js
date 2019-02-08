@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { StyleSheet, View, Text, Button, TextInput } from "react-native";
+import { StyleSheet, View, Text, Button, TextInput, TouchableOpacity } from "react-native";
 import { addCardToDeck, getDecks } from "../utils/api";
 import { AppLoading } from "expo";
 import { white, gray, pink } from "../utils/colors";
@@ -52,11 +52,9 @@ class AddQuestion extends Component {
           value={this.state.answer}
           style={styles.input}
         />
-        <Button
-          style={styles.submit}
-          onPress={this.submit}
-          title="Add Question"
-        />
+        <TouchableOpacity style={styles.submit} disabled={this.state.answer === '' || this.state.question === ''} onPress={this.submit}>
+            <Text style={styles.buttonText}>Add Question</Text>
+          </TouchableOpacity>
       </View>
     );
   }
@@ -65,7 +63,7 @@ class AddQuestion extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: "stretch",
+    alignItems: "center",
     justifyContent: "flex-start"
   },
   title: {
@@ -74,29 +72,37 @@ const styles = StyleSheet.create({
     fontSize: 25,
     color: '#000',
     marginBottom: 18,
+    marginTop: 80,
     height: 80,
     marginLeft: 20,
     marginRight: 20
   },
   input: {
     justifyContent: "center",
-    alignItems: "stretch",
+    alignSelf: "stretch",
     fontSize: 14,
-    color: pink,
+    fontSize: 20,
     borderColor: '#000',
     borderWidth: 1,
     marginBottom: 18,
-    height: 80,
+    height: 60,
     marginLeft: 20,
-    marginRight: 20
+    marginRight: 20,
+    padding: 14
   },
   submit: {
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: '#eee',
+    backgroundColor: '#333',
     color: '#fff',
     height: 60,
-    width: 100
+    width: 200,
+    marginBottom: 30,
+    borderRadius: 10
+  },
+  buttonText: {
+    color: '#fff',
+    fontSize: 15
   }
 });
 

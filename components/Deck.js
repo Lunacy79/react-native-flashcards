@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { StyleSheet, View, Text, Button } from "react-native";
+import { StyleSheet, View, Text, TouchableOpacity } from "react-native";
 import { getDecks } from "../utils/api";
 import { formatNumberCards } from "../utils/helpers";
 import { green } from "../utils/colors"
@@ -31,20 +31,12 @@ class Deck extends Component {
         <Text style={styles.cardNumber}>
           {deck && formatNumberCards(deck.questions)}
         </Text>
-        <Button
-          onPress={() =>
-            this.props.navigation.navigate("AddQuestion", { entryId: deck.title })
-          }
-          title="Add Question"
-          style={styles.button1}
-        />
-        <Button
-          onPress={() =>
-            this.props.navigation.navigate("Quiz", { entryId: deck && deck })
-          }
-          title="Start Quiz"
-          style={styles.button2}
-        />
+        <TouchableOpacity style={styles.button1} onPress={() => this.props.navigation.navigate("AddQuestion", { entryId: deck.title })}>
+          <Text style={styles.buttonText}>Add Question</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.button2} onPress={() => this.props.navigation.navigate("Quiz", { entryId: deck })}>
+          <Text style={styles.buttonText}>Start Quiz</Text>
+        </TouchableOpacity>
       </View>
     );
   }
@@ -53,7 +45,7 @@ class Deck extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: "stretch",
+    alignItems: "center",
     justifyContent: "flex-start"
   },
   title: {
@@ -61,8 +53,8 @@ const styles = StyleSheet.create({
     alignItems: "stretch",
     fontSize: 25,
     color: '#000',
-    marginBottom: 18,
-    height: 80,
+    marginTop: 80,
+    marginBottom: 50,
     marginLeft: 20,
     marginRight: 20
   },
@@ -71,29 +63,34 @@ const styles = StyleSheet.create({
     alignItems: "stretch",
     fontSize: 15,
     color: '#000',
-    marginBottom: 18,
-    height: 80,
+    marginBottom: 80,
     marginLeft: 20,
     marginRight: 20
   },
   button1: {
     justifyContent: "center",
-    alignSelf: "center",
     alignItems: "center",
-    backgroundColor: '#eee',
+    backgroundColor: '#333',
     color: '#fff',
     height: 60,
-    width: 100
+    width: 200,
+    marginBottom: 30,
+    borderRadius: 10
   },
   button2: {
     justifyContent: "center",
-    alignSelf: "center",
     alignItems: "center",
     backgroundColor: green,
     color: '#fff',
     height: 60,
-    width: 100
+    width: 200,
+    marginBottom: 30,
+    borderRadius: 10
   },
+  buttonText: {
+    color: '#fff',
+    fontSize: 15
+  }
 });
 
 
